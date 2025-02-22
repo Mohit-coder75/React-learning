@@ -34,18 +34,22 @@ class App extends Component {
 
   // Create function to remove person from your network here
 
+  removePerson = (index)=>{
+    this.setState((prevState)=>{
+      const updatedNetwork = prevState.network.map((p,i)=> i === index ? {...p, show:false} : p);
+      return {network:updatedNetwork}
+    });
+       };
+
   render() {
     return (
       <div className="App">
         <h1>My Network</h1>
         <div className="list">
-          {this.state.network.map((p, i) => (
-            <>
-            <Person key={p.id} person={p} index={i} />
-            {console.log(i)}
-            </>
-            
-          ))}
+        {this.state.network.map((p, i) => {
+      console.log(i); // ✅ Logging index outside JSX
+      return p.show ? <Person key={p.id} person={p} index={i} removePerson={this.removePerson} /> : null;
+    })}
         </div>
       </div>
     );
