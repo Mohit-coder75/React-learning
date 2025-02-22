@@ -3,7 +3,7 @@ import { Component } from "react";
 class Person extends Component {
   // Define appropriate lifecycle method to show alert here
   componentWillUnmount(){
-    alert(`${this.props.person.email} has been removed from the network`);
+    alert(`A person with email ${this.props.person.email} was removed from your network`);
   }
 
   render() {
