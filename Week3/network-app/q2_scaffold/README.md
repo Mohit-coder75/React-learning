@@ -37,4 +37,8 @@ Rendering People in Network
 })}
 
 Removing a Person
-![alt text](image.png)
+removePerson = (index)=>{
+    this.setState((prevState)=>{
+      const updatedNetwork = prevState.network.map((p,i)=> i === index ? {...p, show:false} : p);
+      return {network:updatedNetwork}
+    });
