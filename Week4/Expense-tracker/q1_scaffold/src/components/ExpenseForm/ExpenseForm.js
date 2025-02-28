@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ExpenseForm.module.css";
 import { useState } from "react";
 
-export default function ExpenseForm ({}) { 
+export default function ExpenseForm ({addTransaction}) { //Receiving addTransaction as a prop
   // Create state or ref for the inputs here
   const [text,setText] = useState("");
   const [amount,setAmount] = useState("");
