@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Transaction.module.css";
 import EditImage from "../../images/edit.png";
 import DeleteImage from "../../images/trash-bin.png";
 
-export default class Transaction extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currentHoverIndex: null
-    };
-  }
-  render() {
+export default function Transaction () {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     currentHoverIndex: null
+  //   };
+  // }
+  const [currentHoverIndex, setCurrentHoverIndex] = useState(null);
     return (
       <li
         key={this.props.expense.id}
@@ -49,5 +49,5 @@ export default class Transaction extends React.Component {
         </div>
       </li>
     );
-  }
+  
 }
