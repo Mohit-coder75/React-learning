@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./ExpenseInfo.module.css";
 
-//it takes two props income and expense
+//// It takes two props: income and expenses (as an array)
 export default function ExpenseInfo ({income, expenses}) {
-  const balance = income-expenses;
+   // Calculate total expenses by summing negative values
+   const totalExpense = expenses.filter(expense => expense.amount < 0) // Only negative values (expenses)
+   .reduce((acc, expense) => acc + Math.abs(expense.amount), 0); // Get absolute sum
+
+   const balance = income - totalExpense;
 
     return (
       <div className={styles.expenseInfoContainer}>
@@ -21,7 +25,7 @@ export default function ExpenseInfo ({income, expenses}) {
           <div>
             <h4>Expense</h4>
             <p id="money-minus" className={`${styles.money} ${styles.minus}`}>
-              -${expenses.toFixed(2)}
+              -${totalExpense.toFixed(2)}
             </p>{/* Total expense amount should be displayed here */}
           </div>
         </div>

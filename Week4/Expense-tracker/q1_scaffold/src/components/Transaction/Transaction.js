@@ -3,7 +3,7 @@ import styles from "./Transaction.module.css";
 import EditImage from "../../images/edit.png";
 import DeleteImage from "../../images/trash-bin.png";
 
-export default function Transaction () {
+export default function Transaction ({expense,index}) {
   // constructor() {
   //   super();
   //   this.state = {
@@ -13,36 +13,35 @@ export default function Transaction () {
   const [currentHoverIndex, setCurrentHoverIndex] = useState(null);
     return (
       <li
-        key={this.props.expense.id}
-        className={`${styles.transaction} ${
-          this.props.expense.amount > 0 ? styles.profit : styles.loss
-        }`}
-        onMouseOver={() => {
-          this.setState({ currentHoverIndex: this.props.index });
-        }}
-        onMouseLeave={() => {
-          this.setState({ currentHoverIndex: null });
-        }}
+        // key={this.props.expense.id}
+        key={expense.id}
+        // className={`${styles.transaction} ${
+        //   this.props.expense.amount > 0 ? styles.profit : styles.loss
+        // }`}
+        className={`${styles.transaction} ${expense.amount > 0 ? styles.profit : styles.loss}`}
+        onMouseOver={() => setCurrentHoverIndex(index)}
+        onMouseLeave={() => setCurrentHoverIndex(null)}
       >
-        <div>{this.props.expense.text}</div>
+        {/* {similary make changes} */}
+        <div>{expense.text}</div>
         <div className={styles.transactionOptions}>
           <div
             className={`${styles.amount} ${
-              this.state.currentHoverIndex === this.props.index &&
+              currentHoverIndex === index &&
               styles.movePrice
             }`}
           >
-            ${this.props.expense.amount}
+            ${expense.amount}
           </div>
           <div
             className={`${styles.btnContainer} ${
-              this.state.currentHoverIndex === this.props.index && styles.active
+             currentHoverIndex === index && styles.active
             }`}
           >
-            <div className={styles.edit} onClick={() => {}}>
+            <div className={styles.edit} onClick={() =>alert("Edit Clicked")}>
               <img src={EditImage} height="100%" alt="Edit" />
             </div>
-            <div className={styles.delete} onClick={() => {}}>
+            <div className={styles.delete} onClick={() => alert("Deleted Clicked")}>
               <img src={DeleteImage} height="100%" alt="Delete" />
             </div>
           </div>

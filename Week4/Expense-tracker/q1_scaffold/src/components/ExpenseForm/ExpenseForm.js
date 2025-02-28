@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ExpenseForm.module.css";
 import { useState } from "react";
 
-export default function ExpenseForm () {
+export default function ExpenseForm ({}) { 
   // Create state or ref for the inputs here
   const [text,setText] = useState("");
   const [amount,setAmount] = useState("");
@@ -11,6 +11,7 @@ export default function ExpenseForm () {
     e.preventDefault(); //prevent refresh
     console.log("Transaction added " , {text, amount});
     //clear input fields
+    addTransaction(text,amount); //calling the function to update state
     setText("");
     setAmount("");
   }
