@@ -32,6 +32,10 @@ export default function App(){
 
     setExpenses(prevExpenses => [...prevExpenses, newTransaction]); // ✅ Correct way to update state
   };
+   // Function to delete a transaction
+   const deleteTransaction = (id) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
     return (
       <>
         <h2 className="mainHeading">Expense Tracker</h2>
@@ -42,7 +46,7 @@ export default function App(){
             {/* Render Expense Info here
             Render Expense List here */}
             <ExpenseInfo income={totalIncome} expenses={totalExpense}/>
-            <ExpenseList transactions={expenses}/> {/* Passing transactions */}
+            <ExpenseList transactions={expenses} onDelete={deleteTransaction}/> {/* Passing transactions */}
           </div>
         </div>
       </>

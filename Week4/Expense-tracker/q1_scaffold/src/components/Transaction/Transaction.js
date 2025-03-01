@@ -3,7 +3,7 @@ import styles from "./Transaction.module.css";
 import EditImage from "../../images/edit.png";
 import DeleteImage from "../../images/trash-bin.png";
 
-export default function Transaction ({expense,index}) {
+export default function Transaction ({expense,index,onDelete}) {
   // constructor() {
   //   super();
   //   this.state = {
@@ -41,7 +41,7 @@ export default function Transaction ({expense,index}) {
             <div className={styles.edit} onClick={() =>alert("Edit Clicked")}>
               <img src={EditImage} height="100%" alt="Edit" />
             </div>
-            <div className={styles.delete} onClick={() => alert("Deleted Clicked")}>
+            <div className={styles.delete} onClick={() => onDelete(expense.id)}>
               <img src={DeleteImage} height="100%" alt="Delete" />
             </div>
           </div>
