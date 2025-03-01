@@ -3,20 +3,25 @@ import React from "react";
 import { useState } from "react";
 import ExpenseForm from "./components/ExpenseForm/ExpenseForm";
 import ExpenseInfo from "./components/ExpenseInfo/ExpenseInfo";
-import Transaction from "./components/Transaction/Transaction";
 import ExpenseList from "./components/ExpenseList/ExpenseList";
 
 //changed to functional component
 export default function App(){
   // Create state for the expenses here
   // const [expenses, setExpenses] = useState([]);
-  const [expenses, setExpenses] = useState([
-    { id: 1, text: "Salary", amount: 5000 },
-    { id: 2, text: "Groceries", amount: -200 },
-    { id: 3, text: "Rent", amount: -15000 },
-  ]); //  Used an array
-  const [income,setIncome] = useState(75000);
+  const [expenses, setExpenses] = useState([]); //  Used an array
+  const [income,setIncome] = useState();
 
+   // Dynamically calculate total income and total expense
+   const totalIncome = expenses
+   .filter((expense) => expense.amount > 0) // Only positive values (income)
+   .reduce((acc, expense) => acc + expense.amount, 0); // Sum income
+
+ const totalExpense = expenses
+   .filter((expense) => expense.amount < 0) // Only negative values (expenses)
+   .reduce((acc, expense) => acc + Math.abs(expense.amount), 0); // Sum absolute expenses
+
+ const balance = totalIncome - totalExpense; // Calculate balance
    // Function to add a new transaction
    const addTransaction = (text, amount) => {
     const newTransaction = {
@@ -36,7 +41,7 @@ export default function App(){
           <div className="expenseContainer">
             {/* Render Expense Info here
             Render Expense List here */}
-            <ExpenseInfo income={income} expenses={expenses}/>
+            <ExpenseInfo income={totalIncome} expenses={totalExpense}/>
             <ExpenseList transactions={expenses}/> {/* Passing transactions */}
           </div>
         </div>
