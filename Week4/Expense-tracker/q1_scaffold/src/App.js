@@ -34,8 +34,19 @@ export default function App(){
   };
    // Function to delete a transaction
    const deleteTransaction = (id) => {
-    setExpenses(expenses.filter((expense) => expense.id !== id));
+    setExpenses((prevExpenses)=>prevExpenses.filter((expense) => expense.id !== id));
   };
+
+  //Function to edit a transaction
+  const editTransaction = (id, updatedText, updatedAmount) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.map((expense) =>
+        expense.id === id
+          ? { ...expense, text: updatedText, amount: parseFloat(updatedAmount) }
+          : expense
+      )
+    );
+  }
     return (
       <>
         <h2 className="mainHeading">Expense Tracker</h2>
@@ -46,7 +57,7 @@ export default function App(){
             {/* Render Expense Info here
             Render Expense List here */}
             <ExpenseInfo income={totalIncome} expenses={totalExpense}/>
-            <ExpenseList transactions={expenses} onDelete={deleteTransaction}/> {/* Passing transactions */}
+            <ExpenseList transactions={expenses} onEdit={editTransaction} onDelete={deleteTransaction}/> {/* Passing transactions */}
           </div>
         </div>
       </>

@@ -4,7 +4,7 @@ import Transaction from "../Transaction/Transaction";
 
 
 //accepts transactionList as props 
-export default function ExpenseList ({transactions, onDelete}) {
+export default function ExpenseList ({transactions, onEdit, onDelete}) {
     return (
       <div className={styles.expenseListContainer}>
         <h3>Transactions</h3>
@@ -12,11 +12,9 @@ export default function ExpenseList ({transactions, onDelete}) {
           {/* Display transactions here */}
           {transactions && transactions.length > 0 ? (
           transactions.map((expense, index) => (
-            <Transaction key={expense.id} expense={expense} index={index} onDelete={onDelete}/>
+            <Transaction key={expense.id} expense={expense} index={index} onEdit= {onEdit} onDelete={onDelete}/>
           ))
-        ) : (
-          <p>No transactions available</p> // Handle empty transactions
-        )}
+        ) : null }
         </ul>
       </div>
     );
